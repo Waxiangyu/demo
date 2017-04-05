@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function ajax(method,url,obj,callback) {
+        //1,新建
+        var xhr=null
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest()
+        }else if(window.ActiveXObject){
+            xhr=new ActiveXObject("Microsoft.XMLHTTP")
+        }else {
+            alert("您的浏览器不支持")
+        }
+        //2,打开操作
+        if(method=="post"){
+            xhr.setRequestHeader("content-type","application/x-www-from-urlencoded")
+        }
+        //3,绑定xhr对象的监听状态
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4){
+                callback(xhr)
+            }
+        }
+        //4,发送请求
+        var data=null
+        if(method=="post"){
+            var str=""
+            for(var item in obj){
+                str+=item+"="+obj[item]+"&"
+            }
+            data=str.substring(0,str.length-1)
+        }else {
+            data=true
+        }
+
+        xhr.send(data)
+    }
+
+    //post 请求
+    ajax("post","post.php",{username:"tom",age:18},function (xhr) {
+        if(xhr.status==200){
+            alert(xhr.responseText)
+        }else {
+            alert("请求失败")+xhr.statusText
+        }
+    })
+
+    //get
+    ajax("get","get.php",{},function (xhr) {
+        if(xhr.status==200){
+            alert(xhr.responseText)
+        }else {
+            alert("请求失败")+xhr.statusText
+        }
+    })
+</script>
+</body>
+</html>

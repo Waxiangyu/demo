@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var arr=[3,4,6,-1,4,6,9,0]
+    function s(arr) {//升序
+        for(var i=0;i<arr.length;i++){
+            for(var j=i+1;j<arr.length;j++){
+                if(arr[i]>arr[j]){
+                    var tem=arr[i]
+                    arr[i]=arr[j]
+                    arr[j]=tem
+                }
+            }
+        }
+        return arr
+    }
+    console.log(s(arr))
+
+    function r(arr) {//倒序
+        for(var i=0;i<arr.length;i++){
+            for(var j=arr.length-1;j>i;j--){
+                if(arr[i]<arr[j]){
+                    var tem=arr[i]
+                    arr[i]=arr[j]
+                    arr[j]=tem
+                }
+            }
+        }
+        return arr
+    }
+    console.log(r(arr))
+</script>
+</body>
+</html>

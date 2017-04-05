@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //1,创建对象
+    var xhr=null
+    if(window.XMLHttpRequest){
+        xhr=new XMLHttpRequest()
+    }else if(window.ActiveXObject){
+        xhr=new ActiveXObject("Microsoft.XMLHTTP")
+    }else {
+        alert("您的浏览器不支持")
+    }
+    //2,打开操作
+    if(xhr!=null){
+        xhr.open("post","post.php",true)//true为异步
+        //3,绑定xhr状态监听改变
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4){
+                if(xhr.status==200){
+                    alert("statusText")
+                    alert("responseText")
+                }else {
+                    alert("系统错误")
+                }
+            }
+        }
+        //4,设置头部信息
+        xhr.setRequestHeader("content-type","application/x-www-from-urlencoded")
+        //5,以post方式向服务器发送数据
+        var json={name:"jack",age:18,nickNam:"qing"}
+        var str=""
+        for(var item in json){
+            //console.log(item),item是key,json[item]是键
+            str+=item+"="+json[item]+"&"
+        }
+        str=str.substring(0,str.length-1)
+        //console.log(str),name=jack&age=18&nickNam=qing,将对象转化为字符串
+        xhr.send(str)
+    }
+</script>
+</body>
+</html>

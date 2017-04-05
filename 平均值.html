@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var arr=[[79,67,66,87,66,91],[84,57,86,78,76,93],[63,87,81,97,76,82]]
+    function avg(arr) {
+        for(var i=0;i<arr.length;i++){
+            var n=0
+            var p=""
+            for(var j=0;j<arr[i].length;j++){
+                n=n+arr[i][j]
+                p=Math.round(n/arr[i].length)
+            }
+            console.log(p)
+        }
+   }
+   avg(arr)
+</script>
+</body>
+</html>

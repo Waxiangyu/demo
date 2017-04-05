@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+//1,创建对象
+    var xhr=null
+    if(window.XMLHttpRequest){
+        xhr=new XMLHttpRequest()
+    }else if(window.ActiveXObject){
+        xhr=new ActiveXObject("Microsoft.XMLHTTP")
+    }else {
+        alert("你的浏览器不支持")
+    }
+    //2,打开操作
+    xhr.open("get","get.php",true)
+    //3,绑定xhr状态改变监听事件
+    xhr.onreadystatechange=callback//不写()就是整个函数本身
+    //4,发送请求
+    xhr.send(true)
+
+    function callback() {
+        if(xhr.readyState==4){
+            if(xhr.status==200){
+                alert(xhr.statusText)
+                alert(xhr.responseText)
+            }else {
+                alert("系统错误")
+            }
+        }
+    }
+</script>
+</body>
+</html>

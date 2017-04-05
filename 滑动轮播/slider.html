@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		#box{
+			width:600px;
+			height:400px;
+			margin:20px auto;
+			position:relative;
+			overflow:hidden;
+		}
+		#adv{
+			width:4200px;/*7张图片600*7*/
+			height:400px;
+			position:absolute;
+			/*left:-600px; 左移1张位置*/
+		}
+		#adv img{
+			float:left;
+		}
+		ul{
+			list-style:none;
+			position:absolute;
+			top:360px;
+			left:220px;
+		}
+		li{
+			float:left;
+			z-index:1;
+			width:20px;
+			height:20px;
+			border-radius:50%;
+			border:1px solid white;
+			background-color:gray;
+			color:white;
+			text-align:center;
+			line-height:20px;
+			margin-left:10px;
+		}
+		a{
+			width:40px;
+			height:40px;
+			text-align:center;
+			line-height:40px;
+			color:white;
+			font-size:36px;
+			font-weight:900;
+			position:absolute;
+			z-index:2;
+			background-color:rgba(0,0,0,0.3);/*a是加透明度的*/
+			cursor:pointer;
+			display:none;
+		}
+		#left{
+			top:180px;
+			left:20px;
+		}
+		#right{
+			top:180px;
+			right:20px;
+		}
+		#box:hover a{
+			display:block;
+		}
+		.on{
+			background-color:orange;
+		}
+	</style>
+ </head>
+ <body>		
+	<div id="box">
+		<div id="adv" style="left:-600px;"><!-- 显示第一张 -->
+			<img src="../../轮播自动/img/five.jpg"><!-- 0 -->
+			<img src="../../轮播自动/img/one.jpg"><!-- -600 -->
+			<img src="../../轮播自动/img/two.jpg"><!-- -1200 -->
+			<img src="../../轮播自动/img/three.jpg"><!-- -1800 -->
+			<img src="../../轮播自动/img/four.jpg"><!-- -2400 -->
+			<img src="../../轮播自动/img/five.jpg"><!-- -3000 -->
+			<img src="../../轮播自动/img/one.jpg"><!-- -3600 -->
+		</div>
+		<ul>
+			<li class="on">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<a id="left">&lt;</a>
+		<a id="right">&gt;</a>
+	</div>
+
+	<script>
+		var box=document.getElementById("box")
+		var adv=document.getElementById("adv")
+		var li=document.querySelectorAll("li")
+		var left=document.getElementById("left")
+		var right=document.getElementById("right")
+		var timer=null;
+		var timer2=null;
+		var nowli=-1;
+		var beforeli=-1;
+		var len=li.length
+		//console.log(len)
+
+		function move(offset) {//图片滑动的切换
+			timer2=setInterval(xiaomove,20)
+			var temoffset=0
+			var speed=offset/20
+			function xiaomove() {//滑动一张图片
+				adv.style.left=parseInt(adv.style.left)+speed+"px"
+				temoffset=temoffset+speed
+				if(temoffset==offset){
+					clearInterval(timer2)
+					timer2=null
+					temoffset=0
+				}
+			}
+			if(parseInt(adv.style.left)>-600){
+				adv.style.left=-3000+"px"
+			}else if(parseInt(adv.style.left)<-3000){
+				adv.style.left=-600+"px"
+			}
+		}
+
+		function ymove(offset) {//图片转的时候，下面点也要跟着转
+			for(var i=0;i<li.length;i++){
+				if(li[i].className=="on"){
+					beforeli=i
+				}
+				//console.log(beforeli)
+				li[i].className=""
+			}
+
+			nowli=beforeli+(offset/(-600))//当前的li是之前的index+传的是第几张图片
+			//console.log(nowli)
+			if(nowli==5){
+				nowli=0
+			}else if(nowli==-1){
+				nowli=4
+			}
+			li[nowli].className="on"
+		}
+
+		for(var i=0;i<len;i++){//点击li的时候切换图片
+			li[i].no=i
+			li[i].onclick=function () {
+				for(var j=0;j<len;j++){
+					if(li[j].className=="on"){
+						beforeli=j
+					}
+					li[j].className=""
+				}
+				nowli=this.no
+				console.log(nowli)
+				li[nowli].className="on"
+				var weiyi=(nowli-beforeli)*(-600)
+				move(weiyi)
+			}
+		}
+
+		right.onclick=function () {
+			if(timer2!=null){
+				return
+			}
+			move(-600)
+			ymove(-600)
+		}
+		left.onclick=function () {
+			if(timer2!=null){
+				return
+			}
+			move(600)
+			ymove(600)
+		}
+		timer=setInterval(right.onclick,1000)
+
+		box.onmouseover=function () {
+			clearInterval(timer)
+		}
+		box.onmouseout=function () {
+			timer=setInterval(right.onclick,1000)
+		}
+	</script>	
+ </body>
+</html>
