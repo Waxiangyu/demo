@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var result=confirm("欢迎来到猜数字游戏中！")
+    if(result){
+        guess()
+    }
+    function guess() {
+        var num=parseInt(prompt("请输入0-10之间的数字！"))
+        var n=Math.ceil(Math.random()*10)
+        if(m<n){
+            alert("猜小了")
+            guess()
+        }else if(m>n){
+            alert("猜大了")
+            guess()
+        }else {
+            var r=confirm("猜对了，是否要继续？")
+            if(r){
+                guess()
+            }
+        }
+    }
+</script>
+</body>
+</html>
