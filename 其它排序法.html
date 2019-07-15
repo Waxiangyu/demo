@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//选择排序法
+			function select(arr){
+				int temp=0;//认为第一个数字是最小的
+				for(let i=0;i<arr.length-1;i++){
+					//每次外层循环，都认为第一个数字是最小的
+					let min=arr[i];
+					let minIndex=i;
+					for(let j=i+1;j<arr.length;j++){
+						if(min>arr[j]){
+							min=arr[j];
+							minIndex=j;
+						}
+					}
+					let temp=arr[i];
+					arr[i]=arr[minIndex];
+					arr[minIndex]=temp;
+				}
+			}
+			
+			//插入排序法
+			function insert(arr){
+				for(let i=1;i<arr.length;i++){
+					//无序列表中要插入的数
+					let insertVal=arr[i];
+					//有序列表中的第一个数
+					let index=i-1;
+					while(index >= 0 && insertVal < arr[index]){
+						arr[index+1]=stt[index];
+						//让Index向前移
+						index--;
+					}
+					//将insertVal插入到适当位置\n
+					arr[index+1]=insertVal;
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>

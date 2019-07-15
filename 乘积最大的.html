@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        
+        <script>
+            // 乘积最大的3个数
+            var array = [-10, 7, 29, 30, 5, -10, -70];
+
+            function sortIntegers(a, b) {
+                return a - b;
+            }
+
+            function computeProduct(array) {
+                var sortArr = array.sort(sortIntegers),//[-70,-10,-10,5,7,29,30]
+                    sum1 = 1,
+                    sum2 = 1,
+                    len = sortArr.length - 1;//lenght-1是脚标
+
+                for (var x = len; x > len - 3; x--) {//6>3,x=6.5.4
+                    sum1 = sum1 * sortArr[x];
+                }
+                sum2 = sortArr[0] * sortArr[1] * sortArr[len];
+console.log(sortArr,sum1,sum2)
+                if (sum1 > sum2) return sum1;
+
+                return sum2
+            };
+            computeProduct(array); 
+        </script>
+    </body>
+</html>

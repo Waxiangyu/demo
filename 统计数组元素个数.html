@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		    let arr=[8,9,5,6,6,9,7];
+		    arr.sort();
+		    let arm='';
+		    for(let i=0;i<arr.length;i++){
+		    	let conter=0;
+		    	for(let j=0;j<arr.length;j++){
+		    		if(arr[i]==arr[j]){
+		    			conter++
+		    		}
+		    	}
+		    	console.log(conter,arr[i],'yyy')
+		    	arm+=arr[i]+'有'+conter+'个，';
+
+		    }
+		    console.log(arm,'')
+		    
+		    
+		    
+		    var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+			var n=names.reduce(function (allNames, name) { 
+			  if (name in allNames) {
+			    allNames[name]++;
+			  }
+			  else {
+			    allNames[name] = 1;
+			  }
+			  return allNames;
+			}, {});
+			console.log(n)//{Alice: 2, Bob: 1, Tiff: 1, Bruce: 1}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>
+			//第一步，先抽出它们的id，以Id为索引，value为id相对应的值，放在一个对象里。
+			//第二步，循环这个对象，去找这个value里面的pid对应的id，如果pid=id，就说明拥有这个id的是有pid的这个的父级。那么给这个父级创建一个child[]来存放子级
+			//如果它的pid没有在这个对象中找到有对应的id，那么就说明它已经是顶级id，就放在最终要return出去的数组中。
+			function arrayToTree(array, id = "id", pid = "pid") {//array是传过来的数据[{}，{}...],id是每一个的id,pid是每一个子级的父级，用来判断父子级的关系
+
+			    array = array.deepClone();
+			    
+			    let tempMap = {};
+			    array.forEach(function(value) {
+					//赋值给tempMap数据
+			        tempMap[value[id]] = value;//{}.id/1=tempMap[1]={value}....tempMap{1:value1,2:value2,3:value3}//id:value
+			    });
+			    
+			    let treeData = [];
+			    tempMap.forEach(function(value) {
+			        //tempMap中的数据给p
+			        let p = tempMap[value[pid]];//tempMap.value.pid=p/ value.pid/0:tempMap.0里的数据给到p/{},有pid相同的,p是几个子级的父级,
+			        //如果value[pid]为1，那么对应的就是上面的tempMap[1/id],子pid=父id的那个对象
+				    if (p) {//如果p是父级，说明value是子级。给p创建一个child[]用来存放子级
+				        if (!p.child) {
+				        	p.child = [];
+				        }
+				        p.child.push(value);//把这些有相同pid的value，放在同一个以p为父级的child[]子里面
+				    } else {//如果value没有父级，也就是说明没有p，就把value放在treeData里，再循环下一个
+				        treeData.push(value);
+				    }
+			    });
+			    return treeData;
+			}
+
+		</script>
+	</body>
+</html>

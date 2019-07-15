@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        
+        <script>
+            
+            var input = []; 
+            var output = []; 
+
+            // 入队
+            function enqueue(Input, item) {
+                return Input.push(item);
+            }
+console.log(enqueue(input,'aoeiuv'))//1
+console.log(dequeue(input,output))//'aoeiuv'
+            // 出队
+            function dequeue(Input, Output) {
+                if (Output.length <= 0) {
+                    while(Input.length > 0) {
+                        var element = Input.pop();
+                        Output.push(element);
+                    }
+                }
+
+                return Output.pop();
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        
+        <script>
+            decimalToBinary(3); // 11
+            decimalToBinary(8); // 1000
+            decimalToBinary(1000); // 1111101000
+
+            function decimalToBinary(digit) {
+                if(digit >= 1) {
+                    if (digit % 2) {//奇数,进入就可以加后面的数
+                        return decimalToBinary((digit - 1) / 2) + 1;
+                    } else {
+                        return decimalToBinary(digit / 2) + 0;
+                    }
+                } else {
+                    return '';
+                }
+            }
+
+            console.log(decimalToBinary(2))
+        </script>
+    </body>
+</html>

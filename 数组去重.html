@@ -9,8 +9,8 @@
 <script>
     //es6方法Set()
     var arr=[1,3,6,5,3,3,3,0,5,0,-1]
-    let unique=new Set(arr)
-    console.log(unique)
+    
+    console.log(Array.from(new Set(arr)))//
 
     //es5
     var arr1=[]
@@ -41,6 +41,30 @@
         return arr2;
     }
     console.log(u(arr))
+    
+    
+    function un(arr){
+    	var ar =[];
+    	var obj = {};
+    	for(var i = 0;i<arr.length;i++){
+    		if(!obj[arr[i]]){//如果有这个数，取反为false，没有则为true,重新声明一个空对象，
+			    			//obj[arr[i]]里的i再为1的时候，因为上一个已经为true了，它在if里的值就是true已经有值了,取反为false
+			    			//不要把obj真当一个对象来看
+  			    obj[arr[i]] = true;//是一个布尔值
+    			ar.push(arr[i]);//循环出来的数
+    			//console.log(obj[arr[i]])
+    			//console.log(arr[i])
+    		}
+    	}
+    	return console.log(ar);
+    }
+    let a=[1,3,6,5,3,3,3,0,5,0,-1]
+    un(a)
+    
+    var arr=[2,4,5,3];                                                 
+    for(var value of arr){
+    	console.log(value+':','for of')
+    }
 </script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        
+        <script>
+            // 二分搜索法：
+            // 　　也称折半搜索，是一种在有序数组中查找特定元素的搜索算法。
+            // 实现步骤：
+            // 　　1. 首先从数组中间开始查找对比，若相等则找到，直接返回中间元素的索引。
+            // 　　2. 若查找值小于中间值，则在小于中间值的那一部分执行步骤1的操作。
+            // 　　3. 若查找值大于中间值，则在大于中间值的那一部分执行步骤1的操作。
+            // 　　4. 否则，返回结果为查不到，返回-1。
+            
+            function search(array, value, left, right) {
+
+                if (left > right) return -1;
+
+                var middle = Math.floor((left + right) / 2);//index
+
+                if (array[middle] === value) {
+                    return middle;
+                } else if (array[middle] > value) {
+                    return search(array, value, left, middle - 1);
+                } else {
+                    return search(array, value, middle + 1, right);
+                }
+            }
+
+            var arr = [1,2,3,4,5,6,7,8];
+            
+　　　      console.log(search(arr, 3, 0, 8));
+
+        </script>
+    </body>
+</html>

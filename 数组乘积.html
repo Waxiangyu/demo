@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        <script>
+            var firstArray = [2, 2, 4, 1];
+            var secondArray = [0, 0, 0, 2];
+            var thirdArray = [-2, -2, -3, 2];
+
+            // productExceptSelf(firstArray); // [8, 8, 4, 16]
+            // productExceptSelf(secondArray); // [0, 0, 0, 0]
+            productExceptSelf(thirdArray); // [12, 12, 8, -12]
+
+            function productExceptSelf(numArray) {
+                var product = 1;
+                var size = numArray.length;
+                var output = [];
+
+                for (var x = 0; x < size; x++) {
+                    output.push(product);
+                    product = product * numArray[x];
+                }
+
+                var product = 1;
+                for (var i = size - 1; i > -1; i--) {
+                    output[i] = output[i] * product;
+                    product = product * numArray[i];
+                }
+
+                return console.log(output);
+            }
+        </script>
+
+    </body>
+</html>

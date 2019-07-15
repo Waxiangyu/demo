@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//浅拷贝,循环 把里面的属性复制，如果是引用类型，只是对地址的复制，引用的还是同一个地址
+			//改变一个，另一个也会改变;
+			function copy(p){
+				let c={};
+				for(let i in p){
+					c[i]=p[i];
+				}
+				return c;
+			}
+			
+			//深拷贝，递归 调用浅拷贝，直到最后都是最后对值的复制，在内存上开辟属于自己的栈
+			function deepCopy(p,c){
+				let c=c||{};
+				for(let i in p){
+					if(typeof p[i]==='object'){//如果属性是引用类型，再调用自己一遍，直到最后都是字符对值的复制为止;
+						c[i]=(p[i].constructor===Array)?[]:{};
+						deepCopy(p[i],c[i]);
+					}else{
+						c[i]=p[i];
+					}
+				}
+				return c;
+			}
+		</script>
+	</body>
+</html>

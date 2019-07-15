@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//原理：在一个个数为n的序列中找一个数作为基准数（任意哪个皆可，一般找第一个），即找到该基准数所在位置k，k作为分界点，
+				//k左边数均小于基准数，k右边数均大于基准数。
+			
+			//具体做法：设置i，j两个指针分别指向最左端和最右端，每次比较都从j指针开始向左移动寻找比基准数小的数后停止移动，
+				//然后指针i向右移动寻找比基准数大的数后停止移动，交换此时i，j所指向的内容，这算一趟中的一次交换完成，直到i，j指针相遇位置即找到k，
+				//将基准数和k位置的数字交换，这算完成一趟排序。（解释一下为什么每次一定要从j指针移动开始：举个栗子说明，某序列为[3,1,2,5,4]，基准数为3，i指向3，j指向4，
+				//如你所愿假设先从i移动找比3大的，i指针移动到5停止，j指针找比3小的，移动到5时相遇了，所以5的位置即为k，交换3和5，序列变为[5,1,2,3,4]，这显然越排越乱。
+				//之所以一定要从右边开始就是保证了从右边过滤的是比基准数小的，然后再从左边移动时即使相遇了也能保证这个数比基准数小交换后不会影响序列）
+			
+			let a=[];
+			for(let k=0;k<100;k++){
+				a.push(Math.floor(Math.random()*100))
+			}
+			console.log(a,'a')
+		    
+			
+			//阮一峰快排
+		    let quickSort=function(arr){
+		    	if(arr.length<=1){return arr};
+		    	let pivotIndex=Math.floor(arr.length/2);
+		    	let pivot=arr.splice(pivotIndex,1)[0];
+		    	let left=[],right=[];
+		    	for(let i=0;i<arr.length;i++){
+		    		if(arr[i]<pivot){
+		    			left.push(arr[i]);
+		    		}else{
+		    			right.push(arr[i]);
+		    		}
+		    	}
+		    	return quickSort(left).concat([pivot],quickSort(right))
+		    }
+		    console.time('阮一峰')
+		    console.log(quickSort(a))
+		    console.timeEnd('阮一峰')
+		    
+		    
+		    //快排2
+		    function quick(arr,left,right){
+		    	let index;
+		    	if(arr.length>1){
+		    		index=partition(arr,left,right);
+		    		if(left<index-1){
+		    			quick(arr,left,index-1)
+		    		}
+		    		if(index<right){
+		    			quick(arr,index,right)
+		    		}
+		    	}
+		    	return arr;
+		    }
+		    function partition(arr,left,right){
+		    	//用index取中间值，而非splice
+		    	const pivot=arr[Math.floor((right+left)/2)]
+		    	let i=left,j=right;
+		    	while(i<=j){
+		    		while(compare(arr[i],pivot)===-1){i++};
+		    		while(compare(arr[j],pivot)===1){j--};
+		    		if(i<=j){
+		    			let temp;
+				    	temp=arr[i];
+				    	arr[i]=arr[j];
+				    	arr[j]=temp;
+		    			i++;
+		    			j--;
+		    		}
+		    	}
+		    	return i;
+		    }
+		    //比较函数
+		    function compare(a,b){
+		    	if(a===b){
+		    		return 0;
+		    	}
+		    	return a<b?-1:1;
+		    }
+		    console.time('快排2')
+		    console.log(quick(a,0,a.length-1))
+		    console.timeEnd('快排2')
+		    
+		    //快排三
+		    function qs(a,left,right){
+		    	if(left>right){ //一定要有这个判断，因为有递归left和i-1，若没有这个判断条件，该函数会进入无限死错位递归
+		    		return;
+		    	}
+		    	let l=left,r=right,jizhun=a[left];//基准总是取序列开头的元素
+		    	//该while的功能为每一趟进行的多次比较和交换最终找到位置k。当i==j时意味着找到k位置了
+		    	while(l!=r){
+		    		//只要大于等于基准数，j指针向左移动直到小于基准数才不进入该while。i<j的限制条件也是很重要，不然一直在i!=j这个循环里，j也会越界
+		    		while(a[r]>=jizhun&&l<r){r--}
+		    		//只要小于等于基准数，i指针向右移动直到大于基准数才不进入该while。等于条件也是必要的，举例[4,7,6,4,3]验证一下是两个4交换
+		    		while(a[l]<=jizhun&&l<r){l++}
+		    		if(l<r){//如果i==j跳i出外层while
+		    			let t;
+		    			t=a[l];
+		    			a[l]=a[r];
+		    			a[r]=t
+		    		}
+		    	}
+		    	a[left]=a[l];//交换基准数和k位置上的数
+		    	a[l]=jizhun;
+		    	
+		    	qs(a,left,l-1);
+		    	qs(a,l+1,right);
+		    	
+		    	return a;
+		    }
+		    console.time('快排3')
+		    console.log(qs(a,0,a.length-1))
+		    console.timeEnd('快排3')
+		    
+		    
+
+		</script>
+	</body>
+</html>

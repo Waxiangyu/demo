@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //用js求第n位的数值，1,2,3,7,22......n
+    function fun(n) {
+        var a=1,b=2,c=0;
+        if(n==1){
+            c=1
+        }else if(n==2){
+            c=2
+        }
+        for(var i=0;i<n-2;i++){
+            c=a*b+1;
+            a=b;
+            b=c;
+        }
+        return c;
+    }
+    n=prompt("x")
+    alert(fun(n))
+
+//    var arr=[2,3,4,5,6,7,9]
+//    for(var i=0;i<arr.length;i++){
+//        if((arr[i]%2)!=0){
+//            delete arr[i]
+//        }
+//    }
+//    alert(arr)//[2,,4,,6,,]length:7
+</script>
+</body>
+</html>

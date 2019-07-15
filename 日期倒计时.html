@@ -10,7 +10,9 @@
 <script>
     function ShowCountDown(year,month,day,divname){
         var date = new Date();//获取当前日期,/2017,0,0
+        //console.log(date)
         var leftDate = new Date(year, month-1, day);//获取传进的日期，年，月，星期几,/2017,15,14
+        //console.log(leftDate)
 
         var time=leftDate.getTime()-date.getTime();//自距离1970年1月1日，毫秒数之差
         var secondTime = parseInt(time/1000);//秒数
@@ -23,7 +25,7 @@
         var name = document.getElementById(divname);
         name.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒";
     }
-    window.setInterval(function(){ShowCountDown(2017,4,20,'divdown');}, 1000);
+    setInterval(function(){ShowCountDown(2017,4,20,'divdown');}, 1000);
 </script>
 </body>
 </html>

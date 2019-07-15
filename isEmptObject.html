@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>是否为空对象</title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			let isEmptyObject=function(obj) {
+		        for (let prop in obj){
+		            return false;
+		        }
+		        return true;
+		   };
+		   
+			let obj1={
+				name:'lily',
+				age:18
+			}
+			console.log(isEmptyObject(obj1),'obj1NoEmpt')
+			
+			let obj2={}
+			console.log(isEmptyObject(obj2),'obj2Empty')
+		</script>
+	</body>
+</html>

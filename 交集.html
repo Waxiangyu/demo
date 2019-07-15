@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+    <head></head>
+    <body>
+        
+        <script>
+            // 数组的交集
+            var first = [2, 2, 4, 1];
+            var second = [1, 2, 0, 2];
+
+            intersection(first, second); // [2, 1]
+
+            function intersection(first, second) {
+
+                var hashmap = {};
+                var Array= [];
+
+                first.forEach(function(element) {
+                    hashmap[element] = 1;
+                });
+
+                second.forEach(function(element) {
+                    if (hashmap[element] === 1) {
+                        Array.push(element);
+                        hashmap[element]++;
+                    }
+                });
+
+                return Array;
+
+            }
+        </script>
+    </body>
+</html>

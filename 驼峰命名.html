@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //把background-color变成backgroundColor
+    var str="background-color"
+    console.log(aA(str))
+    function aA(str) {
+        var arr=str.split("-");//["background", "color"]
+        for(var i=1;i<arr.length;i++){//i代表的是整个color,arr[1]
+            arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substring(1)//substring(index1)找到1之后的，charAt(0)返回指定位置字符
+            console.log(arr[i])
+        }
+        return arr.join("")
+    }
+
+
+
+
+</script>
+</body>
+</html>
